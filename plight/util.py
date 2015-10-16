@@ -52,17 +52,17 @@ def start_server(config):
         sys.stderr.write('Plight is already running\n')
         sys.exit(1)
 
-    context = DaemonContext(pidfile=PID,
-                            uid=pwd.getpwnam(config['user']).pw_uid,
-                            gid=grp.getgrnam(config['group']).gr_gid,
-                            files_preserve=[
-                                weblogging_handler.stream,
-                                applogging_handler.stream,
-                            ],)
-    context.stdout = applogging_handler.stream
-    context.stderr = applogging_handler.stream
-    context.open()
-    os.umask(0o022)
+    #context = DaemonContext(pidfile=PID,
+    #                        uid=pwd.getpwnam(config['user']).pw_uid,
+    #                        gid=grp.getgrnam(config['group']).gr_gid,
+    #                        files_preserve=[
+    #                            weblogging_handler.stream,
+    #                            applogging_handler.stream,
+    #                        ],)
+    #context.stdout = applogging_handler.stream
+    #context.stderr = applogging_handler.stream
+    # context.open()
+    #os.umask(0o022)
 
     try:
         try:
@@ -78,7 +78,7 @@ def start_server(config):
             log_message("ERROR: " + str(ex))
     finally:
         log_message('Plight has stopped...')
-        context.close()
+        # context.close()
 
 
 def log_message(message):
